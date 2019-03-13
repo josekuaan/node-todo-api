@@ -19,13 +19,13 @@ MongoClient.connect(url,{useNewUrlParser: true},(err,client)=>{
         //     }
 
 
-            // client.db(dbNmae).collection('Users').deleteOne({nam:'amos'}).then((res)=>{
-            //     console.log(res);
-            // })
-
-            client.db(dbName).collection('Users').findOneAndDelete({_id:new ObjectID("5c7c018b2c8ce5267cfd18c4")}).then((res)=>{
+            client.db(dbNmae).collection('Users').deleteOne({age:'amos'}).then((res)=>{
                 console.log(res);
             })
+
+            // client.db(dbName).collection('Users').findOneAndDelete({_id:new ObjectID("5c7c018b2c8ce5267cfd18c4")}).then((res)=>{
+            //     console.log(res);
+            // })
           
         // (err)=>{
         //     console.log('Unable to delete the data', err)

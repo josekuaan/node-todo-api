@@ -2,7 +2,7 @@
 
 // const MongoClient = require('mongodb').MongoClient
 
-var {MongoClient,ObjectID} = require('mongodb');
+var {MongoClient,ObjectID} = require('mongodb');  //destructuring
 
 var url = 'mongodb://localhost:27017/TodoApp';
 const dbName = 'TodoApp'

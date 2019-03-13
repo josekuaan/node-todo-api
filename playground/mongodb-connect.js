@@ -35,20 +35,21 @@ MongoClient.connect(url,{ useNewUrlParser: true }, (err,client)=>{
     //     console.log(JSON.stringify(result.ops,undefined,2))
     //  
 
-    // var db = client.db(dbName).collection('Users');
+    var db = client.db(dbName).collection('Users');
      
-    // db.insertOne({
-    //     name:'ifeanyi',
-    //     age:8,
-    //     location:'Magodo Lagos'
-    // },(err,result)=>{
-    //     if(err){
-    //        return  console.log('Unable to insert into the db')
-    //     }else{
-    //      console.log(JSON.stringify(result.ops[0]._id.getTimestamp(),undefined,2))
-    //     }
-    //     client.close();
-    // })
+    db.insertOne({
+        name:'ifeanyi',
+        age:8,
+        location:'Magodo Lagos'
+    },(err,result)=>{
+        if(err){
+           return  console.log('Unable to insert into the db')
+        }else{
+            console.log(result)
+         console.log(JSON.stringify(result.ops[0]._id.getTimestamp(),undefined,2))
+        }
+        client.close();
+    })
 }
 })
 
