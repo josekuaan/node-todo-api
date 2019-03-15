@@ -5,6 +5,8 @@ const {ObjectID} = require('mongodb')
 var body_parser = require('body-parser')
 
 
+const port = process.env.PORT || 3000
+
 var {mongoose} = require('./db/mongoose')
 var {Todo} = require('./models/todo')
 var {User} = require('./models/user')
@@ -83,6 +85,36 @@ app.get('/todos/:id',(req,res)=>{
     res.status(400).send()
   });
 
+
+
+  //api route for updating todoApp
+
+  app.patch('todos/:id',(req,res)=>{
+    var id = req.body.id
+    var body = _.pick(req.body,['text','completed'])
+
+    if(!ObjectID.isValid(id)){
+      res.status(400).send()
+    }else{
+      if(_.isBoolean(body.completed && body.comleted)){
+        body.completedAt = new Date().getTime 
+      }else{
+        body.completed = false;
+        body.completedAt = null;
+      }
+      Todo.findByIdAndUpdate(id,{$set:body},{new:true})
+      .then((todo)=>{
+        if(todo){
+          res.send({todo})
+        }
+      }, (e)=>{
+        res.status(400).send(e)
+    
+      })
+        
+    }
+  })
+
   // api route for deleting by an id
 
   app.delete('/todos/:id',(req,res)=>{
@@ -107,8 +139,8 @@ app.get('/todos/:id',(req,res)=>{
     res.status(404).send()
   })
 
-app.listen(3000,()=>{
-  console.log('server is up')
+app.listen(port,()=>{
+  console.log(`server is up on port ${port}`)
 })
 
 
